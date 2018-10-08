@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1536768958420.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "2DCA5926",
+    "lastKnownWriteTime" : 1538930390,
+    "last_content_update" : 1539003318776,
+    "path" : "C:/Users/Raytine/synchgold/syncgold2.R",
+    "project_path" : "syncgold2.R",
+    "properties" : {
+        "cursorPosition" : "70,11",
+        "scrollLine" : "50",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

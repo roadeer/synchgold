@@ -1,0 +1,134 @@
+abs<-with(cut,absprice)
+library(readr)
+library(readxl)
+library(lattice)
+pgd <- read_csv("~/gauss17/TSE-R/cut.csv")
+gap<-with(cut,gap)
+un<-with(cut,userno)
+price<-with(cut,price)
+pd<-with(cut,pricedelta)
+v<-with(cut,volume)
+abs<-with(cut,absprice)
+fit <- lm(gap ~  un + price+pd+v+abs, data=cut)
+summary(fit)
+plot(fit)
+symbol.vec = c("MSFT", "^GSPC")
+getSymbols(symbol.vec, from ="2000-01-03", to = "2012-04-03")
+colnames(MSFT)
+start(MSFT)
+end(MSFT)
+# extract adjusted closing prices
+MSFT = MSFT[, "MSFT.Adjusted", drop=F]
+GSPC = GSPC[, "GSPC.Adjusted", drop=F]
+# plot prices
+plot(MSFT)
+plot(GSPC)
+# calculate log-returns for GARCH analysis
+MSFT.ret = CalculateReturns(MSFT, method="log")
+GSPC.ret = CalculateReturns(GSPC, method="log")
+# remove first NA observation
+MSFT.ret = MSFT.ret[-1,]
+GSPC.ret = GSPC.ret[-1,]
+colnames(MSFT.ret) ="MSFT"
+colnames(GSPC.ret) = "GSPC"
+# create combined data series
+MSFT.GSPC.ret = merge(MSFT.ret,GSPC.ret)
+# plot returns
+plot(MSFT.ret)
+plot(GSPC.ret)
+# scatterplot of returns
+plot( coredata(GSPC.ret), coredata(MSFT.ret), xlab="GSPC", ylab="MSFT",
+type="p", pch=16, lwd=2, col="blue")
+abline(h=0,v=0)
+# univariate normal GARCH(1,1) for each series
+garch11.spec = ugarchspec(mean.model = list(armaOrder = c(0,0)),
+variance.model = list(garchOrder = c(1,1),
+model = "sGARCH"),
+distribution.model = "norm")
+# dcc specification - GARCH(1,1) for conditional correlations
+dcc.garch11.spec = dccspec(uspec = multispec( replicate(2, garch11.spec) ),
+dccOrder = c(1,1),
+distribution = "mvnorm")
+dcc.garch11.spec
+dcc.fit = dccfit(dcc.garch11.spec, data = MSFT.GSPC.ret)
+class(dcc.fit)
+slotNames(dcc.fit)
+names(dcc.fit@mfit)
+names(dcc.fit@model)
+# many extractor functions - see help on DCCfit object
+# coef, likelihood, rshape, rskew, fitted, sigma,
+# residuals, plot, infocriteria, rcor, rcov
+# show, nisurface
+# show dcc fit
+dcc.fit
+# plot method
+plot(dcc.fit)
+# Make a plot selection (or 0 to exit):
+#
+# 1:   Conditional Mean (vs Realized Returns)
+# 2:   Conditional Sigma (vs Realized Absolute Returns)
+# 3:   Conditional Covariance
+# 4:   Conditional Correlation
+# 5:   EW Portfolio Plot with conditional density VaR limits
+symbol.vec = c("MSFT", "^GSPC")
+getSymbols(symbol.vec, from ="2000-01-03", to = "2012-04-03")
+colnames(MSFT)
+start(MSFT)
+end(MSFT)
+library(ccgarch);
+library(fGarch);
+library(MASS);
+library(FinTS);
+library(tseries);
+library(vars);
+library(ccgarch)
+library(fGarch)
+library(MASS)
+library(FinTS)
+library(tseries)
+library(vars)
+install ccgarch
+install(ccgarch)
+install.packages("ccgarch")
+install.packages("fgarch")
+install.packages("fGarch")
+library(ccgarch)
+library(fGarch)
+library(MASS)
+library(FinTS)
+library(tseries)
+library(vars)
+library(fGarch)
+install.packages("vars")
+library(ccgarch)
+library(fGarch)
+library(MASS)
+library(FinTS)
+library(tseries)
+library(vars)
+data(dji30retw)
+install.packages("quantmod")
+library(ccgarch)
+library(fGarch)
+library(MASS)
+library(FinTS)
+library(tseries)
+library(vars)
+library(quantmod)
+symbol.vec = c("MSFT", "^GSPC")
+getSymbols(symbol.vec, from ="2000-01-03", to = "2012-04-03")
+colnames(MSFT)
+start(MSFT)
+end(MSFT)
+library(ccgarch)
+library(fGarch)
+library(MASS)
+library(FinTS)
+library(tseries)
+library(vars)
+library(quantmod)
+symbol.vec = c("MSFT", "^GSPC")
+getSymbols(symbol.vec, from ="2000-01-03", to = "2012-04-03")
+colnames(MSFT)
+start(MSFT)
+end(MSFT)
