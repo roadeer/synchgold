@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1536850235441.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3922861277",
+    "id" : "BB46BE39",
+    "lastKnownWriteTime" : 1540029014,
+    "last_content_update" : 1540029014225,
+    "path" : "C:/Users/Raytine/synchgold/vpin_gold.R",
+    "project_path" : "vpin_gold.R",
+    "properties" : {
+        "cursorPosition" : "46,65",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

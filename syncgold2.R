@@ -15,6 +15,8 @@ library(fUnitRoots)
 library(lmtest)
 library(np)
 library(quantreg)
+library(quantreg)
+library(psych)
 pgd <- read_csv("shfe_autd321.csv")
 #ohlc_x <- pgd[,c("Open_x","High_x","Low_x","Close_x")]
 #volatility_x <- volatility(ohlc_x, calc="close", mean0=TRUE)
@@ -32,8 +34,8 @@ pgd <- read_csv("shfe_autd321.csv")
 #out<-dcc.results$out;
 #DCC<-dcc.results$DCC[,2];
 #ts.plot(DCC)
-#openx <-with(pgd,Open_x)
-#open_y <- with(pgd,Open_y)
+openx <-with(pgd,Open_x)
+open_y <- with(pgd,Open_y)
 #sr.reg=lm(openx~open_y)
 #error = residuals(sr.reg)
 #plot(error)
@@ -55,7 +57,7 @@ lm(formula = openxlr ~ open_ylr)
 
 
 y=cbind(openxlr,open_ylr)
-#y=cbind(openx,open_y)
+y=cbind(openx,open_y)
 jj_return <- ca.jo(y, type = "trace",ecdet = "trend", K = 3, spec = "transitory")
 #y=cbind(openx,open_y)
 myvecm.ols <- cajools(jj_return)
@@ -70,7 +72,7 @@ po.coint<-po.test(y,demean=TRUE,lshort=TRUE)
 q1 <- rq(open_ylr ~ openxlr, tau = seq(.1,.9,.1))
 summary(q1)
 plot(q1)
-ghat <- npreg(y~x, ckertype="epanechnikov", ckerorder=4)
+ghat <- npreg(open_ylr~openxlr, ckertype="epanechnikov", ckerorder=4)
 SR <- matrix(1, nrow = 2, ncol = 2)
 SR[2, 2] <- 0
 SR[1, 2] <- 0
