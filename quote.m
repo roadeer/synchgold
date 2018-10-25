@@ -1,18 +1,18 @@
 
 clear all;
 clc;
-data_quote_minute= csvread('AUTD-min_formated.csv',1,0);
+%data_quote_minute= csvread('AUTD-min_formated.csv',1,0);
+data_quote_minute= csvread('815.csv',1,0);
 data_csv = [];
 data_all = [];
 data_vol=data_quote_minute(:,7);
-for i=1:50
-i
-tmp = data_quote_minute(i*4000+1:i*4000+4050,1:7);
+
+tmp = data_quote_minute(:,1:7);
 %tmp = data_quote_minute;
 data_size=size(tmp);
 
 %threshold = quantile(data_vol,0.9);
-threshold = 106000*3;
+threshold = max(data_vol)/3;
 data_moderate=average_vol(tmp,threshold);
 candle_data = data_moderate(:,2:7);
 time_slice=candle_data(:,1);
@@ -44,8 +44,7 @@ grid on
 subplot(3,1,3)
 plot( cdfpin)
 grid on
-pause
-end
+
 % data_quote_minute= csvread('C_of_lbma_datatd.csv',1,0);
 % tmp = data_quote_minute(20000:25000,1:7)
 % data_size=size(tmp);
