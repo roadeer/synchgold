@@ -17,7 +17,14 @@ library(np)
 library(quantreg)
 library(quantreg)
 library(psych)
-pgd <- read_csv("data_all.csv")
+#pgd <- read_csv("shfe_autd2.csv")
+#open_x <-with(pgd,open_x)
+#open_y <- with(pgd,open_y)
+#close_x <-with(pgd,close_x)
+#close_y <- with(pgd,close_y)
+#openxlr<-log(close_x)-log(open_x)
+#open_ylr<-log(close_y)-log(open_y)
+#ccf(openxlr, open_ylr, lag =200, correlation = TRUE, pl = TRUE)
 #ohlc_x <- pgd[,c("Open_x","High_x","Low_x","Close_x")]
 #volatility_x <- volatility(ohlc_x, calc="close", mean0=TRUE)
 #volatility_x[is.na(volatility_x)] <- 0
@@ -34,20 +41,25 @@ pgd <- read_csv("data_all.csv")
 #out<-dcc.results$out;
 #DCC<-dcc.results$DCC[,2];
 #ts.plot(DCC)
+pgd <- read_csv("vpintd1.csv")
+#pgd <- read_csv("vpin99994.csv")
 diff <-with(pgd,diff)
 absreturn <-abs(diff)
-cdfpin<-with(pgd,cdfpin)
-pin<-with(pgd,pin)
+cdfpin<-with(pgd,cdfvpin)
+pin<-with(pgd,vpin)
+open<-with(pgd,open)
+
 
 describe(diff)
 adfx=adf.test(diff)
 ppx=pp.test(diff)
 
+
 y=cbind(cdfpin,absreturn) 
 dfglsy = urersTest(open_ylr, type = "DF-GLS", model = "constant",
                    +           lag.max = 4, doplot = TRUE)
 
-lm(formula = cdfpin ~ absreturn(-1))
+sr.reg <- lm(formula = cdfpin[1:1878] ~ open[3:1880])
 
 
 y=cbind(openxlr,open_ylr)
